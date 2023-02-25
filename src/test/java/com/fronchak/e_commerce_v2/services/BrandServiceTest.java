@@ -19,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.fronchak.e_commerce_v2.dtos.brand.BrandInsertDTO;
@@ -135,7 +136,7 @@ public class BrandServiceTest {
 	
 	@Test
 	public void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
-		doThrow(EntityNotFoundException.class).when(repository).deleteById(INVALID_ID);
+		doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(INVALID_ID);
 		
 		assertThrows(ResourceNotFoundException.class, () -> service.deleteById(INVALID_ID));
 		

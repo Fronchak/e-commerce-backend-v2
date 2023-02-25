@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,7 +66,7 @@ public class BrandService {
 		try {
 			repository.deleteById(id);	
 		}
-		catch(EntityNotFoundException e) {
+		catch(EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Brand", id.toString());
 		}
 		catch(DataIntegrityViolationException e) {
