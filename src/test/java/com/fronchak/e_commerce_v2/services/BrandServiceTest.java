@@ -1,5 +1,11 @@
 package com.fronchak.e_commerce_v2.services;
 
+import static com.fronchak.e_commerce_v2.factories.BrandMocks.mockBrand;
+import static com.fronchak.e_commerce_v2.factories.BrandMocks.mockBrandInsertDTO;
+import static com.fronchak.e_commerce_v2.factories.BrandMocks.mockBrandOutputDTO;
+import static com.fronchak.e_commerce_v2.factories.BrandMocks.mockBrandOutputDTOList;
+import static com.fronchak.e_commerce_v2.factories.BrandMocks.mockBrandUpdateDTO;
+import static com.fronchak.e_commerce_v2.factories.BrandMocks.mockBrands;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -14,6 +20,7 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,7 +35,6 @@ import com.fronchak.e_commerce_v2.dtos.brand.BrandUpdateDTO;
 import com.fronchak.e_commerce_v2.entities.Brand;
 import com.fronchak.e_commerce_v2.exceptions.DatabaseException;
 import com.fronchak.e_commerce_v2.exceptions.ResourceNotFoundException;
-import com.fronchak.e_commerce_v2.factories.BrandMocks;
 import com.fronchak.e_commerce_v2.mappers.BrandMapper;
 import com.fronchak.e_commerce_v2.repositories.BrandRepository;
 
@@ -50,11 +56,18 @@ public class BrandServiceTest {
 	@InjectMocks
 	private BrandService service;
 	
+	private Brand entity;
+	private BrandOutputDTO outputDTO;
+	
+	@BeforeEach
+	void setUp() {
+		entity = mockBrand();
+		outputDTO = mockBrandOutputDTO();
+	}
+	
 	@Test
 	public void saveShouldSaveEntityAndReturnBrandOutputDTO() {
-		BrandInsertDTO inputDTO = BrandMocks.mockBrandInsertDTO();
-		BrandOutputDTO outputDTO = BrandMocks.mockBrandOutputDTO();
-		Brand entity = BrandMocks.mockBrand();
+		BrandInsertDTO inputDTO = mockBrandInsertDTO();
 		
 		when(repository.save(any(Brand.class))).thenReturn(entity);
 		when(mapper.convertBrandToBrandOutputDTO(entity)).thenReturn(outputDTO);
@@ -67,24 +80,22 @@ public class BrandServiceTest {
 	
 	@Test
 	public void updateShouldUpdateEntityAndReturnBrandOutputDTOWhenIdIsValid() {
-		Brand entityBeforeSave = BrandMocks.mockBrand();
-		Brand entityAfterSave = BrandMocks.mockBrand();
-		BrandOutputDTO outputDTO = BrandMocks.mockBrandOutputDTO();
-		BrandUpdateDTO inputDTO = BrandMocks.mockBrandUpdateDTO();
+		Brand entityAfterSave = mockBrand();
+		BrandUpdateDTO inputDTO = mockBrandUpdateDTO();
 		
-		when(repository.getReferenceById(VALID_ID)).thenReturn(entityBeforeSave);
-		when(repository.save(entityBeforeSave)).thenReturn(entityAfterSave);
+		when(repository.getReferenceById(VALID_ID)).thenReturn(entity);
+		when(repository.save(entity)).thenReturn(entityAfterSave);
 		when(mapper.convertBrandToBrandOutputDTO(entityAfterSave)).thenReturn(outputDTO);
 		
 		BrandOutputDTO result = service.update(inputDTO, VALID_ID);
 		
-		verify(mapper, times(1)).copyBrandInputDTOToBrand(inputDTO, entityBeforeSave);
+		verify(mapper, times(1)).copyBrandInputDTOToBrand(inputDTO, entity);
 		assertSame(outputDTO, result);
 	}
 	
 	@Test
 	public void updateShouldThrowResourceNotFoundWhenIdIsInvalid() {
-		BrandUpdateDTO inputDTO = BrandMocks.mockBrandUpdateDTO();
+		BrandUpdateDTO inputDTO = mockBrandUpdateDTO();
 		
 		when(repository.getReferenceById(INVALID_ID)).thenThrow(EntityNotFoundException.class);
 		
@@ -93,10 +104,7 @@ public class BrandServiceTest {
 	}
 	
 	@Test
-	public void findByIdShouldReturnBrandOutputDTOWhenIdExists() {
-		Brand entity = BrandMocks.mockBrand();
-		BrandOutputDTO outputDTO = BrandMocks.mockBrandOutputDTO();
-		
+	public void findByIdShouldReturnBrandOutputDTOWhenIdExists() {		
 		when(repository.findById(VALID_ID)).thenReturn(Optional.of(entity));
 		when(mapper.convertBrandToBrandOutputDTO(entity)).thenReturn(outputDTO);
 		
@@ -114,8 +122,8 @@ public class BrandServiceTest {
 	
 	@Test
 	public void findAllShouldReturnBrandOutputDTOList() {
-		List<Brand> entityList = BrandMocks.mockBrands();
-		List<BrandOutputDTO> outputDTOList = BrandMocks.mockBrandOutputDTOList();
+		List<Brand> entityList = mockBrands();
+		List<BrandOutputDTO> outputDTOList = mockBrandOutputDTOList();
 		
 		when(repository.findAll()).thenReturn(entityList);
 		when(mapper.convertBrandsToBrandOutputDTOs(entityList)).thenReturn(outputDTOList);

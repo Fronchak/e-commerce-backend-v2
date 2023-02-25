@@ -1,5 +1,6 @@
 package com.fronchak.e_commerce_v2.mappers;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,7 @@ public class CategoryMapper {
 		return new CategoryOutputDTO(entity);
 	}
 	
-	public List<CategoryNameOutputDTO> convertCategoriesToCategoryNameOutputDTOs(List<Category> entities) {
+	public List<CategoryNameOutputDTO> convertCategoriesToCategoryNameOutputDTOs(Collection<Category> entities) {
 		return entities.stream()
 				.map((entity) -> convertCategoryToCategoryNameOutputDTO(entity))
 				.collect(Collectors.toList());

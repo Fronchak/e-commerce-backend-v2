@@ -43,6 +43,10 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "id_brand")
 	private Brand brand;
+	
+	public Product() {
+		quantity = 0;
+	}
 
 	public Long getId() {
 		return id;
@@ -123,5 +127,9 @@ public class Product {
 			return false;
 		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
+	}
+	
+	public boolean inStock() {
+		return quantity > 0;
 	}
 }
