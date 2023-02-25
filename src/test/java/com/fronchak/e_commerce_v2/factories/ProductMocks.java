@@ -110,7 +110,7 @@ public class ProductMocks {
 		mock.setDescription(mockDescription(0));
 		mock.setImgUrl(mockImgUrl(0));
 		mock.setPrice(mockPrice(0));
-		mock.setIdBrnad(0L);
+		mock.setIdBrand(0L);
 		mock.setIdCategories(List.of(10L, 11L));
 		return mock;
 	}

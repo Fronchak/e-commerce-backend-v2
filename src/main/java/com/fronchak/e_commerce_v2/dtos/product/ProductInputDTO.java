@@ -12,7 +12,7 @@ public class ProductInputDTO implements Serializable {
 	private String description;
 	private String imgUrl;
 	private Double price;
-	private Long idBrnad;
+	private Long idBrand;
 	private List<Long> idCategories = new ArrayList<>();
 	
 	public String getName() {
@@ -46,12 +46,12 @@ public class ProductInputDTO implements Serializable {
 		this.price = price;
 	}
 	
-	public Long getIdBrnad() {
-		return idBrnad;
+	public Long getIdBrand() {
+		return idBrand;
 	}
 	
-	public void setIdBrnad(Long idBrnad) {
-		this.idBrnad = idBrnad;
+	public void setIdBrand(Long idBrand) {
+		this.idBrand = idBrand;
 	}
 	
 	public List<Long> getIdCategories() {
