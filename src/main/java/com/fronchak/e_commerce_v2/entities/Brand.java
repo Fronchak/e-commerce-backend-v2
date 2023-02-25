@@ -20,7 +20,7 @@ public class Brand {
 	private String name;
 	
 	@Column(columnDefinition = "TEXT", name = "img_url")
-	private String imgUr;
+	private String imgUrl;
 
 	public Long getId() {
 		return id;
@@ -38,12 +38,12 @@ public class Brand {
 		this.name = name;
 	}
 
-	public String getImgUr() {
-		return imgUr;
+	public String getImgUrl() {
+		return imgUrl;
 	}
 
-	public void setImgUr(String imgUr) {
-		this.imgUr = imgUr;
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	@Override
