@@ -16,7 +16,7 @@ public class BrandMapper {
 		return new BrandOutputDTO(entity);
 	}
 	
-	public List<BrandOutputDTO> convertBrandListToBrandOutputDTOList(List<Brand> list) {
+	public List<BrandOutputDTO> convertBrandsToBrandOutputDTOs(List<Brand> list) {
 		return list.stream()
 				.map((entity) -> convertBrandToBrandOutputDTO(entity))
 				.collect(Collectors.toList());

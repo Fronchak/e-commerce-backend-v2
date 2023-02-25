@@ -37,9 +37,9 @@ public class BrandMapperTest {
 	
 	@Test
 	public void convertBrandListToBrandOutputDTOListShouldConvertCorrectly() {
-		List<Brand> list = BrandMocks.mockBrandList();
+		List<Brand> list = BrandMocks.mockBrands();
 		
-		List<BrandOutputDTO> resultList = mapper.convertBrandListToBrandOutputDTOList(list);
+		List<BrandOutputDTO> resultList = mapper.convertBrandsToBrandOutputDTOs(list);
 		
 		BrandAsserts.assertBrandOutputDTOList(resultList);
 	}

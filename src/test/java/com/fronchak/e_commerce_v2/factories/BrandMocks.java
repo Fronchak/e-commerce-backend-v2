@@ -47,7 +47,7 @@ public class BrandMocks {
 		return mock;
 	}
 	
-	public static List<Brand> mockBrandList() {
+	public static List<Brand> mockBrands() {
 		List<Brand> list = new ArrayList<>();
 		list.add(mockBrand(0));
 		list.add(mockBrand(1));

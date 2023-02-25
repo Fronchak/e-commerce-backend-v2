@@ -3,6 +3,7 @@ package com.fronchak.e_commerce_v2.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +11,7 @@ import com.fronchak.e_commerce_v2.dtos.brand.BrandInsertDTO;
 import com.fronchak.e_commerce_v2.dtos.brand.BrandOutputDTO;
 import com.fronchak.e_commerce_v2.dtos.brand.BrandUpdateDTO;
 import com.fronchak.e_commerce_v2.entities.Brand;
+import com.fronchak.e_commerce_v2.exceptions.DatabaseException;
 import com.fronchak.e_commerce_v2.exceptions.ResourceNotFoundException;
 import com.fronchak.e_commerce_v2.mappers.BrandMapper;
 import com.fronchak.e_commerce_v2.repositories.BrandRepository;
@@ -53,11 +55,21 @@ public class BrandService {
 		return mapper.convertBrandToBrandOutputDTO(entity);
 	}
 	
+	@Transactional(readOnly = true)
 	public List<BrandOutputDTO> findAll() {
-		return null;
+		List<Brand> entities = repository.findAll();
+		return mapper.convertBrandsToBrandOutputDTOs(entities);
 	}
 	
-	public void delete(Long id) {
-		
+	public void deleteById(Long id) {
+		try {
+			repository.deleteById(id);	
+		}
+		catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Brand", id.toString());
+		}
+		catch(DataIntegrityViolationException e) {
+			throw new DatabaseException("Brand cannot be deleted");
+		}
 	}
 }
