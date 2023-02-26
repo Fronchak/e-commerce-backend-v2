@@ -1,4 +1,4 @@
-package com.fronchak.e_commerce_v2.services;
+package com.fronchak.e_commerce_v2util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -17,6 +17,8 @@ public class ProductAsserts {
 		assertEquals("Mock product name 0", result.getName());
 		assertEquals("http://product0.jpg", result.getImgUrl());
 		assertEquals(1.0, result.getPrice());
+		assertEquals(4, result.getGrade());
+		assertEquals(2, result.getNumberOfAssessments());
 	}
 
 	public static void assertProductSimpleOutputDTO_1(ProductSimpleOutputDTO result) {
@@ -24,6 +26,8 @@ public class ProductAsserts {
 		assertEquals("Mock product name 1", result.getName());
 		assertEquals("http://product1.jpg", result.getImgUrl());
 		assertEquals(2.0, result.getPrice());
+		assertEquals(4, result.getGrade());
+		assertEquals(2, result.getNumberOfAssessments());
 	}
 	
 	public static void assertProductSimpleOutputDTOs(Page<ProductSimpleOutputDTO> result) {
@@ -39,5 +43,7 @@ public class ProductAsserts {
 		assertEquals("http://product0.jpg", result.getImgUrl());
 		assertEquals(1.0, result.getPrice());
 		assertTrue(result.isInStock());
+		assertEquals(4, result.getGrade());
+		assertEquals(2, result.getNumberOfAssessments());
 	}
 }

@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fronchak.e_commerce_v2.entities.enums.Grade;
+import com.fronchak.e_commerce_v2.util.Convertions;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -146,5 +149,17 @@ public class Product {
 	
 	public boolean inStock() {
 		return quantity > 0;
+	}
+	
+	public int numberOfAssessments() {
+		return assessments.size();
+	}
+	
+	public Grade averageGrade() {
+		Double average = assessments.stream()
+				.mapToInt((assessment) -> assessment.getGrade().getAvaliation())
+				.average().orElse(2.5);
+		return Convertions.getGrade(average);
+				
 	}
 }

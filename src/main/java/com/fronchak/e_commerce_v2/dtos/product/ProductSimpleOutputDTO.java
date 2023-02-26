@@ -12,6 +12,8 @@ public class ProductSimpleOutputDTO implements Serializable {
 	private String name;
 	private String imgUrl;
 	private Double price;
+	private Integer grade;
+	private Integer numberOfAssessments;
 	
 	public ProductSimpleOutputDTO() {}
 	
@@ -20,6 +22,8 @@ public class ProductSimpleOutputDTO implements Serializable {
 		name = entity.getName();
 		imgUrl = entity.getImgUrl();
 		price = entity.getPrice();
+		grade = entity.averageGrade().getAvaliation();
+		numberOfAssessments = entity.numberOfAssessments();
 	}
 	
 	public Long getId() {
@@ -52,5 +56,21 @@ public class ProductSimpleOutputDTO implements Serializable {
 	
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Integer getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Integer grade) {
+		this.grade = grade;
+	}
+
+	public Integer getNumberOfAssessments() {
+		return numberOfAssessments;
+	}
+
+	public void setNumberOfAssessments(Integer numberOfAssessments) {
+		this.numberOfAssessments = numberOfAssessments;
 	}
 }

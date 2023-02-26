@@ -1,5 +1,6 @@
 package com.fronchak.e_commerce_v2.entities;
 
+import java.time.Instant;
 import java.util.Objects;
 
 import com.fronchak.e_commerce_v2.entities.enums.Grade;
@@ -21,6 +22,9 @@ public class Assessment {
 	
 	@Column(columnDefinition = "TEXT")
 	private String message;
+	
+	@Column(columnDefinition = "TIMESTAMP")
+	private Instant instant;
 	
 	@Enumerated(EnumType.ORDINAL)
 	private Grade grade;
@@ -58,6 +62,14 @@ public class Assessment {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	
+	public Instant getInstant() {
+		return instant;
+	}
+
+	public void setInstant(Instant instant) {
+		this.instant = instant;
 	}
 
 	public Grade getGrade() {

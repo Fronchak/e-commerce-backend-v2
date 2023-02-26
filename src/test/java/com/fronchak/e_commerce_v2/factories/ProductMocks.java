@@ -30,6 +30,8 @@ public class ProductMocks {
 		mock.setBrand(BrandMocks.mockBrand());
 		mock.addCategory(CategoryMocks.mockCategory(0));
 		mock.addCategory(CategoryMocks.mockCategory(1));
+		mock.addAssessment(AssessmentMocks.mockAssessment(2));
+		mock.addAssessment(AssessmentMocks.mockAssessment(4));
 		return mock;
 	}
 	
@@ -67,6 +69,8 @@ public class ProductMocks {
 		mock.setName(mockName(i));
 		mock.setPrice(mockPrice(i));
 		mock.setImgUrl(mockImgUrl(i));
+		mock.setGrade(4);
+		mock.setNumberOfAssessments(2);
 		return mock;
 	}
 	
@@ -84,6 +88,8 @@ public class ProductMocks {
 		mock.setInStock(true);
 		mock.setBrand(BrandMocks.mockBrandOutputDTO());
 		mock.setCategories(CategoryMocks.mockCategoryNameOutputDTOs());
+		mock.setGrade(4);
+		mock.setNumberOfAssessments(2);
 		return mock;
 	}
 	

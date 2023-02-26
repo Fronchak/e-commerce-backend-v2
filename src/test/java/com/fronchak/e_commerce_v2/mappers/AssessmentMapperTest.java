@@ -2,6 +2,7 @@ package com.fronchak.e_commerce_v2.mappers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +15,7 @@ import com.fronchak.e_commerce_v2.dtos.assessment.AssessmentOutputDTO;
 import com.fronchak.e_commerce_v2.entities.Assessment;
 import com.fronchak.e_commerce_v2.entities.enums.Grade;
 import com.fronchak.e_commerce_v2.factories.AssessmentMocks;
-import com.fronchak.e_commerce_v2.services.AssessmentAsserts;
+import com.fronchak.e_commerce_v2util.AssessmentAsserts;
 
 @ExtendWith(SpringExtension.class)
 public class AssessmentMapperTest {
@@ -29,10 +30,13 @@ public class AssessmentMapperTest {
 	@Test
 	public void convertAssessmentToAssessmentOutputDTOShouldConvertCorrectly() {
 		Assessment entity = AssessmentMocks.mockAssessment();
+		Instant instant = Instant.now();
+		entity.setInstant(instant);
 		
 		AssessmentOutputDTO result = mapper.convertAssessmentToAssessmentOutputDTO(entity);
 		
 		AssessmentAsserts.assertAssessmentOutputDTO_0(result);
+		assertEquals(instant, result.getInstant());
 	}
 	
 	@Test
@@ -47,11 +51,14 @@ public class AssessmentMapperTest {
 	@Test
 	public void copyAssessmentInputDTOToAssessmentShouldCopyValuesCorrectly() {
 		AssessmentInputDTO inputDTO = AssessmentMocks.mockAssessmentInputDTO();
+		Instant instant = Instant.now();
+		inputDTO.setInstant(instant);
 		Assessment entity = new Assessment();
 		
 		mapper.copyAssessmentInputDTOToAssessment(inputDTO, entity);
 		
 		assertEquals("Mock assessment message 0", entity.getMessage());
 		assertEquals(Grade.HORRIBLE, entity.getGrade());
+		assertEquals(instant, entity.getInstant());
 	}
 }

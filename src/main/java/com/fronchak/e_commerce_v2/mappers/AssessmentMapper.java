@@ -25,6 +25,7 @@ public class AssessmentMapper {
 	
 	public void copyAssessmentInputDTOToAssessment(AssessmentInputDTO dto, Assessment entity) {
 		entity.setMessage(dto.getMessage());
+		entity.setInstant(dto.getInstant());
 		entity.setGrade(Grade.toEnum(dto.getGrade()));
 	}
 }
