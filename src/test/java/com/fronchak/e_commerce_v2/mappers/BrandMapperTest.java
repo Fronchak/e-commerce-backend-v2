@@ -13,7 +13,6 @@ import com.fronchak.e_commerce_v2.dtos.brand.BrandInputDTO;
 import com.fronchak.e_commerce_v2.dtos.brand.BrandOutputDTO;
 import com.fronchak.e_commerce_v2.entities.Brand;
 import com.fronchak.e_commerce_v2.factories.BrandMocks;
-import com.fronchak.e_commerce_v2.mappers.BrandMapper;
 import com.fronchak.e_commerce_v2util.BrandAsserts;
 
 @ExtendWith(SpringExtension.class)

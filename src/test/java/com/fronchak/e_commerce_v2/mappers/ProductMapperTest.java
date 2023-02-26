@@ -1,7 +1,6 @@
 package com.fronchak.e_commerce_v2.mappers;
 
 import static com.fronchak.e_commerce_v2.factories.ProductMocks.mockProduct;
-import static com.fronchak.e_commerce_v2.factories.ProductMocks.mockProductOutputDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.when;
@@ -40,12 +39,10 @@ public class ProductMapperTest {
 	private ProductMapper productMapper;
 	
 	private Product entity;
-	private ProductOutputDTO outputDTO;
 	
 	@BeforeEach
 	void setUp() {
 		entity = mockProduct();
-		outputDTO = mockProductOutputDTO();
 	}
 	
 	@Test
