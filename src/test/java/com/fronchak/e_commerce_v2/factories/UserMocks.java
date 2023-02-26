@@ -3,8 +3,10 @@ package com.fronchak.e_commerce_v2.factories;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fronchak.e_commerce_v2.dtos.user.UserInsertDTO;
 import com.fronchak.e_commerce_v2.dtos.user.UserOutputDTO;
 import com.fronchak.e_commerce_v2.dtos.user.UserRolesOutputDTO;
+import com.fronchak.e_commerce_v2.dtos.user.UserUpdateDTO;
 import com.fronchak.e_commerce_v2.entities.User;
 
 public class UserMocks {
@@ -66,5 +68,22 @@ public class UserMocks {
 		mocks.add(mockUserOutputDTO(0));
 		mocks.add(mockUserOutputDTO(1));
 		return mocks;
+	}
+	
+	public static UserInsertDTO mockUserInsertDTO() {
+		UserInsertDTO mock = new UserInsertDTO();
+		mock.setUsername(mockUsername(0));
+		mock.setPassword(mockPassword(0));
+		mock.setConfirmPassword(mockPassword(0));
+		return mock;
+	}
+	
+	public static UserUpdateDTO mockUserUpdateDTO() {
+		UserUpdateDTO mock = new UserUpdateDTO();
+		mock.setUsername(mockUsername(0));
+		mock.setPassword(mockPassword(0));
+		mock.setNewPassword(mockPassword(1));
+		mock.setConfirmNewPassword(mockPassword(1));
+		return mock;
 	}
 }
